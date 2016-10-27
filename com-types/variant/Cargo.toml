@@ -1,0 +1,15 @@
+[package]
+name = "variant"
+version = "0.1.0"
+
+[dependencies]
+winapi = "0.2"
+oleaut32-sys = "0.2"
+array = { path = "../array", version = "0.1" }
+bool = { path = "../bool", version = "0.1" }
+bstr = { path = "../bstr", version = "0.1" }
+currency = { path = "../currency", version = "0.1" }
+date = { path = "../date", version = "0.1" }
+decimal = { path = "../decimal", version = "0.1" }
+hresult = { path = "../hresult", version = "0.1" }
+inner = { path = "../inner", version = "0.1" }
