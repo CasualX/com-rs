@@ -9,10 +9,10 @@ use winapi::{RPC_C_AUTHN_LEVEL_DEFAULT, RPC_C_IMP_LEVEL_IMPERSONATE, EOAC_NONE, 
 use winapi::{RPC_C_AUTHN_WINNT, RPC_C_AUTHZ_NONE, RPC_C_AUTHN_LEVEL_CALL};
 use super::sys::{CoSetProxyBlanket};
 
-use super::hr::{HResult};
-use super::{ComResult, ComPtr, AsComPtr, ComCast};
+use ::com_types::hr::{HResult};
+use ::com_types::com::{ComResult, ComPtr, AsComPtr, ComCast};
 use ::com_sys::{ComClassInterface, ComInterface};
-use super::unknown::{IUnknownPtr};
+use ::com_types::unknown::{IUnknownPtr};
 
 bitflags! {
 	pub flags CoInit: u32 {

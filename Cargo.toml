@@ -3,13 +3,4 @@ members = [
 	"com-core",
 	"com-sys",
 	"com-types",
-	"com-types/array",
-	"com-types/bool",
-	"com-types/bstr",
-	"com-types/currency",
-	"com-types/date",
-	"com-types/decimal",
-	"com-types/hresult",
-	"com-types/inner",
-	"com-types/variant",
 ]

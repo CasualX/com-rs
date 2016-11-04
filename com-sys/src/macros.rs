@@ -30,8 +30,8 @@ These help with plumbing the required FFI structs and associated traits.
   Defines and implements a vtbl struct.
 
   ```
-  # #[macro_use] extern crate com_core; fn main() {
-  use ::com_core::unknown::{IUnknownVtbl};
+  # #[macro_use] extern crate com_sys; fn main() {
+  use ::com_sys::unknown::{IUnknownVtbl};
 
   com_vtbl! {
         IInterfaceVtbl: IUnknownVtbl,
@@ -48,8 +48,8 @@ These help with plumbing the required FFI structs and associated traits.
   Defines and implements an interface struct and its vtbl struct.
 
   ```
-  # #[macro_use] extern crate com_core; fn main() {
-  use ::com_core::unknown::{IUnknown, IUnknownVtbl};
+  # #[macro_use] extern crate com_sys; fn main() {
+  use ::com_sys::unknown::{IUnknown, IUnknownVtbl};
 
   com_interface! {
         interface IInterface(IInterfaceVtbl): IUnknown(IUnknownVtbl);
@@ -104,7 +104,7 @@ macro_rules! guid {
 /// # Examples
 ///
 /// ```
-/// # #[macro_use] extern crate com_core; fn main() {
+/// # #[macro_use] extern crate com_sys; fn main() {
 /// static_guid!(STATIC_GUID, {0xAAAAAAAA-0xBBBB-0xCCCC-0xDDDD-0xEEEEEEEEEEEE});
 /// 
 /// // This would be equal if you could compare `GUID`s...
@@ -151,7 +151,7 @@ macro_rules! com_vtbl {
 			pub base: $ibase_vtbl<$iface>,
 			$(pub $ident: $vfn,)*
 		}
-		impl<$iface: $crate::ComInterface> ::core::ops::Deref for $iface_vtbl<$iface> {
+		impl<$iface: $crate::ComInterface> ::std::ops::Deref for $iface_vtbl<$iface> {
 			type Target = $ibase_vtbl<$iface>;
 			#[inline(always)] fn deref(&self) -> &$ibase_vtbl<$iface> { &self.base }
 		}
@@ -164,7 +164,7 @@ macro_rules! com_vtbl {
 /// By convention they should be named after their interface name with `Vtbl` added at the end.
 ///
 /// Creates a new vtbl struct inheriting from the base vtbl.
-/// Implements [`ComVtbl`](trait.ComVtbl.html) and `::core::ops::Deref` to the base through its `base` member.
+/// Implements [`ComVtbl`](trait.ComVtbl.html) and `::std::ops::Deref` to the base through its `base` member.
 ///
 /// Creates a new interface struct containing just a `&'static` reference to its vtbl.
 /// Implements [`ComInterface`](trait.ComInterface.html) which can access its vtbl and iid.
@@ -179,8 +179,8 @@ macro_rules! com_vtbl {
 /// See [`guid!`](macro.guid!.html) for help with the IID format.
 ///
 /// ```
-/// # #[macro_use] extern crate com_core; fn main() {
-/// use ::com_core::unknown::{IUnknown, IUnknownVtbl};
+/// # #[macro_use] extern crate com_sys; fn main() {
+/// use ::com_sys::unknown::{IUnknown, IUnknownVtbl};
 /// 
 /// com_interface! {
 /// 	interface IInterface(IInterfaceVtbl): IUnknown(IUnknownVtbl);
@@ -195,11 +195,11 @@ macro_rules! com_vtbl {
 /// Expands to, comments added.
 ///
 /// ```
-/// # #[macro_use] extern crate com_core; fn main() {
-/// use ::com_core::unknown::{IUnknown, IUnknownVtbl};
+/// # #[macro_use] extern crate com_sys; fn main() {
+/// use ::com_sys::unknown::{IUnknown, IUnknownVtbl};
 /// 
 /// // Import these to reduce visual clutter, they use `$crate::*` internally.
-/// use ::com_core::{ComInterface, ComVtbl, GUID};
+/// use ::com_sys::{ComInterface, ComVtbl, GUID};
 /// 
 /// // Represents a boring vtbl with fn pointers to its virtual functions.
 /// // Note that it is generic over its `This` type allowing easier reuse and type safety.
@@ -214,7 +214,7 @@ macro_rules! com_vtbl {
 /// // Marks the vtbl struct as `ComVtbl`.
 /// impl<IInterface: ComInterface> ComVtbl for IInterfaceVtbl<IInterface> {}
 /// // Faux inheritance through `Deref` for convenience.
-/// impl<IInterface: ComInterface> ::core::ops::Deref for IInterfaceVtbl<IInterface> {
+/// impl<IInterface: ComInterface> ::std::ops::Deref for IInterfaceVtbl<IInterface> {
 /// 	type Target = IUnknownVtbl<IInterface>;
 /// 	fn deref(&self) -> &IUnknownVtbl<IInterface> { &self.base }
 /// }

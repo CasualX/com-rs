@@ -1,6 +1,0 @@
-[package]
-name = "inner"
-version = "0.1.0"
-
-[lib]
-path = "inner.rs"

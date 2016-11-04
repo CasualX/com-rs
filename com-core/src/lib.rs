@@ -65,25 +65,8 @@ extern crate ole32;
 extern crate bitflags;
 #[macro_use]
 extern crate com_sys;
+extern crate com_types;
 
 mod sys;
 
-pub extern crate hresult as hr;
-pub type ComResult<T> = Result<T, hr::HResult>;
-
-pub use winapi::{LPVOID, GUID};
-
-#[macro_use]
-pub mod macros;
-
-mod traits;
-pub use traits::*;
-
 pub mod com;
-
-pub mod unknown;
-
-pub mod timeout;
-
-#[doc(hidden)]
-pub use com_sys::{ComVtbl, ComInterface, ComClass, ComClassInterface};

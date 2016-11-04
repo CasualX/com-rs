@@ -1,7 +1,6 @@
 /*!
 */
 
-#![no_std]
 #![cfg(windows)]
 
 extern crate winapi;

@@ -1,4 +1,4 @@
-use winapi::{CLSID, IID};
+use ::winapi::{CLSID, IID};
 
 /// COM Vtbl structs implement `ComVtbl` which is little more than a marker.
 ///
@@ -15,7 +15,7 @@ use winapi::{CLSID, IID};
 /// Rust can do better:
 ///
 /// ```
-/// # use ::com_core::ComInterface;
+/// # use ::com_sys::ComInterface;
 /// struct IInterfaceVtbl<IInterface: ComInterface> {
 /// 	pub Foo: unsafe extern "stdcall" fn(
 /// 		This: *mut IInterface,
